@@ -6,22 +6,18 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
         game.dsa5.sheets.ActorSheetdsa5Ship = ActorSheetdsa5Ship;
         console.log(game.dsa5.sheets.ActorSheetdsa5Ship);
     }
-}
-    //Actors.registerSheet("dsa5", CharacterMerchantSheetDSA5, { types: ["character"] })
-    /*
+
     static get defaultOptions() {
         const options = super.defaultOptions;
         mergeObject(options, {
             classes: options.classes.concat(["dsa5", "actor", "character-sheet"]),
             width: 784,
+            heigt: 100,
         });
         return options;
     }
 
-
     get template() {
-        if (this.showLimited()) return "ship_sheet.html";
-        return "ship_sheet.html";
+        return "./modules/dsa5_ship_combat/templates/ship_sheet.html";
     }
-
-}*////Data\systems\dsa5\modules\actor\actor-dsa5.js
+}
