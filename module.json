@@ -10,8 +10,9 @@
         "name": "minen"
       }
     ],
-    "scripts": [
-      "init.js"
+    "esmodules": [
+      "modules/ship_sheet.js",
+      "modules/init.js"
     ],
     "relationships": {
       "systems": [{
@@ -27,4 +28,4 @@
       "minimum": "10",
       "verified": "11"
     }
-  }
+}
