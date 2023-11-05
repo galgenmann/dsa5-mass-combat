@@ -1,0 +1,30 @@
+{
+    "id": "dsa5_ship_combat",
+    "title": "DSA Ship Combat",
+    "description": "A simple module created for naval battles with the DSA4.1 (Das schwarze Auge or in english The Dark Eye) System.",
+    "authors": [
+      {
+        "name": "jumper"
+      },
+      {
+        "name": "minen"
+      }
+    ],
+    "scripts": [
+      "init.js"
+    ],
+    "relationships": {
+      "systems": [{
+        "id": "dsa5",
+        "type": "system",
+        "compatibility": {
+          "minimum": "5.0.0"
+        }
+      }]
+    },
+    "version": "0.0.1",
+    "compatibility": {
+      "minimum": "10",
+      "verified": "11"
+    }
+  }
