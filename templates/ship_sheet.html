@@ -33,20 +33,10 @@ Schiffswerte im Formular:
 <div class="general">
     <img class="charimg profile" src="{{actor.img}}" data-tooltip="{{actor.name}}" data-edit="img">
 
-    <div class="row-section" style="margin-top:10px;">
-        <div class="col ten center lineheight col-wounds" data-tooltip="hull">
+    <div class="row-section" style="margin-top:10px; width: 100%">
+        <div id="hullBar" class="col">
             <span>Hull</span>
-        </div>
-        <div class="col">
-            <div class="healthbar bar-wounds barLeft;" data-tooltip="hull"></div>
-            <div data-tooltip="hull"  class="soloBar healthbar bar-wounds barLeft">
-                <div class="bar LeP" style="--a: {{actor.system.status.wounds.value}}; --b: {{actor.system.status.wounds.max}}">
-                </div>
-                <div class="barLabel">
-                    <input type="number" data-tooltip="Current" name="system.status.wounds.value" data-dtype="Number" value="{{actor.system.status.wounds.value}}" /> /
-                    <span data-tooltip="max">{{actor.system.status.wounds.max}}</span>
-                </div>
-            </div>
+            <div data-tooltip="Hull" class="soloBar healthbar bar-wounds barLeft">
                 <!--TODO: LeP klasse mit eigener ueberschreiben -->
                 <div class ="bar LeP" style="--a: 5; --b: 5"></div>
                 <div class="barLabel">
@@ -55,37 +45,44 @@ Schiffswerte im Formular:
                     <span>5</span>
                 </div>
             </div>
+        </div>
     
-        <span>Rig</span>
-        <div data-tooltip="Rig" class="soloBar healthbar bar-wounds barLeft">
-            <!--TODO: LeP klasse mit eigener ueberschreiben -->
-            <div class ="bar LeP" style="--a: 5; --b: 5"></div>
-            <div class="barLabel">
-                <input type="number" data-tooltip="Current" value="5">
-                /
-                <span>5</span>
+        <div id="rigBar" class="col">
+            <span>Rig</span>
+            <div data-tooltip="Rig" class="soloBar healthbar bar-wounds barLeft">
+                <!--TODO: LeP klasse mit eigener ueberschreiben -->
+                <div class ="bar LeP" style="--a: 5; --b: 5"></div>
+                <div class="barLabel">
+                    <input type="number" data-tooltip="Current" value="5">
+                    /
+                    <span>5</span>
+                </div>
             </div>
         </div>
 
-        <span>Crew</span>
-        <div data-tooltip="Crew" class="soloBar healthbar bar-wounds barLeft">
-            <!--TODO: LeP klasse mit eigener ueberschreiben -->
-            <div class ="bar LeP" style="--a: 5; --b: 5"></div>
-            <div class="barLabel">
-                <input type="number" data-tooltip="Current" value="5">
-                /
-                <span>5</span>
+        <div id="crewBar" class="col">
+            <span>Crew</span>
+            <div data-tooltip="Crew" class="soloBar healthbar bar-wounds barLeft">
+                <!--TODO: LeP klasse mit eigener ueberschreiben -->
+                <div class ="bar LeP" style="--a: 5; --b: 5"></div>
+                <div class="barLabel">
+                    <input type="number" data-tooltip="Current" value="5">
+                    /
+                    <span>5</span>
+                </div>
             </div>
         </div>
 
-        <span>Oar</span>
-        <div data-tooltip="Oar" class="soloBar healthbar bar-wounds barLeft">
-            <!--TODO: LeP klasse mit eigener ueberschreiben -->
-            <div class ="bar LeP" style="--a: 5; --b: 5"></div>
-            <div class="barLabel">
-                <input type="number" data-tooltip="Current" value="5">
-                /
-                <span>5</span>
+        <div id="oarBar" class="col">
+            <span>Oar</span>
+            <div data-tooltip="Oar" class="soloBar healthbar bar-wounds barLeft">
+                <!--TODO: LeP klasse mit eigener ueberschreiben -->
+                <div class ="bar LeP" style="--a: 5; --b: 5"></div>
+                <div class="barLabel">
+                    <input type="number" data-tooltip="Current" value="5">
+                    /
+                    <span>5</span>
+                </div>
             </div>
         </div>
     </div>
