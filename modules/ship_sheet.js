@@ -1,7 +1,7 @@
 import ActorSheetDsa5 from "../../../systems/dsa5/modules/actor/actor-sheet.js";
 
 export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
-    static registerSheet(){
+    static async registerSheet(){
         Actors.registerSheet("dsa5", ActorSheetdsa5Ship, { types: ["character"] });
         game.dsa5.sheets.ActorSheetdsa5Ship = ActorSheetdsa5Ship;
         console.log(game.dsa5.sheets.ActorSheetdsa5Ship);
@@ -16,6 +16,13 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
         });
         return options;
     }
+
+    /*
+    async _render(force = false, options = {}) {
+        await super._render(force, options);
+        loadTemplates(['./modules/dsa5_ship_combat/templates/ship_main.html'])
+    }*/
+
 
     get template() {
         return "./modules/dsa5_ship_combat/templates/ship_sheet.html";

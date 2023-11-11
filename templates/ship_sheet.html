@@ -1,1 +1,131 @@
-<p>This is a test</p>
+<!-- 
+    Balken :
+- Rumpf
+- Takelage
+- Besatzung
+- Riemen
+ 
+Schiffswerte im Formular:
+- Haerte
+- Qualitaet von 
+    - Matrosen, ...
+    - Auch eins für allgemein wenn keine angaben gemacht sind
+- Rumpf
+- Geschwindigkeit, gesegelt
+    - Vor dem Wind 
+    - mit Raumem Wind
+    - Am Wind 
+    - Gegenwind
+- Geschwindigkeit, gerudert
+    - Marschgeschwindigkeit,
+    - Rammgeschwindigkeit
+    - Rückwärtsfahrt.
+    - Beweglichkeit
+
+- Metatalent Gefechtskommandant
+    - Talenprobe auf (MU/IN/CH)
+    - Talentwert = (Orientierung+Kriegskunst(Seegefechte)+Boote&Schiffe(Kampfmanöver)) / 3
+
+    
+-->
+<form class="lockfalse" autocomplete="off">
+
+<div class="general">
+    <img class="charimg profile" src="{{actor.img}}" data-tooltip="{{actor.name}}" data-edit="img">
+
+    <div class="row-section" style="margin-top:10px;">
+        <div class="col ten center lineheight col-wounds" data-tooltip="hull">
+            <span>Hull</span>
+        </div>
+        <div class="col">
+            <div class="healthbar bar-wounds barLeft;" data-tooltip="hull"></div>
+            <div data-tooltip="hull"  class="soloBar healthbar bar-wounds barLeft">
+                <div class="bar LeP" style="--a: {{actor.system.status.wounds.value}}; --b: {{actor.system.status.wounds.max}}">
+                </div>
+                <div class="barLabel">
+                    <input type="number" data-tooltip="Current" name="system.status.wounds.value" data-dtype="Number" value="{{actor.system.status.wounds.value}}" /> /
+                    <span data-tooltip="max">{{actor.system.status.wounds.max}}</span>
+                </div>
+            </div>
+                <!--TODO: LeP klasse mit eigener ueberschreiben -->
+                <div class ="bar LeP" style="--a: 5; --b: 5"></div>
+                <div class="barLabel">
+                    <input type="number" data-tooltip="Current" value="5">
+                    /
+                    <span>5</span>
+                </div>
+            </div>
+    
+
+    <!-- <div class="row-section" style="margin-top:10px;">
+        <div class="col ten center lineheight col-wounds" data-tooltip="wounds">
+            {{localize 'CHARAbbrev.LeP'}}
+        </div>
+        <div class="col {{#if prepare.magic.hasPrayers}}{{#if prepare.magic.hasSpells}}third{{else}}fourty{{/if}}{{else}}fourty{{/if}}">
+            <div class="healthbar bar-wounds barLeft{{#if prepare.isSwarm}} swarmcount{{/if}}{{#if prepare.magic.hasPrayers}}{{else if prepare.magic.hasSpells}}{{else}} soloBar{{/if}}" style="--swarm: {{actor.system.swarm.count}};" data-tooltip="wounds">
+
+                <div class="bar LeP" style="--a: {{actor.system.status.wounds.value}}; --b: {{actor.system.status.wounds.max}}">
+                </div>
+                <div class="barLabel">
+                    <input type="number" data-tooltip="Current" name="system.status.wounds.value" data-dtype="Number" value="{{actor.system.status.wounds.value}}" /> /
+                    <span data-tooltip="max">{{actor.system.status.wounds.max}}</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+        <span>Rig</span>
+        <div data-tooltip="Rig" class="soloBar healthbar bar-wounds barLeft">
+            <!--TODO: LeP klasse mit eigener ueberschreiben -->
+            <div class ="bar LeP" style="--a: 5; --b: 5"></div>
+            <div class="barLabel">
+                <input type="number" data-tooltip="Current" value="5">
+                /
+                <span>5</span>
+            </div>
+        </div>
+
+        <span>Crew</span>
+        <div data-tooltip="Crew" class="soloBar healthbar bar-wounds barLeft">
+            <!--TODO: LeP klasse mit eigener ueberschreiben -->
+            <div class ="bar LeP" style="--a: 5; --b: 5"></div>
+            <div class="barLabel">
+                <input type="number" data-tooltip="Current" value="5">
+                /
+                <span>5</span>
+            </div>
+        </div>
+
+        <span>Oar</span>
+        <div data-tooltip="Oar" class="soloBar healthbar bar-wounds barLeft">
+            <!--TODO: LeP klasse mit eigener ueberschreiben -->
+            <div class ="bar LeP" style="--a: 5; --b: 5"></div>
+            <div class="barLabel">
+                <input type="number" data-tooltip="Current" value="5">
+                /
+                <span>5</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- {{> systems/dsa5/templates/actors/parts/attributes.html}} -->
+
+<!-- TABS -->
+<section id="tab-sections">
+    <div class="navWrapper">
+        <i class="fas fa-angle-left left-btn"></i>
+        <i class="fas fa-angle-right right-btn"></i>
+        <nav id="dsa5-primarytabs" class="sheet-tabs tabs">
+            <a class="item" data-tab="main">{{localize "attributes"}}</a>
+        </nav>
+    </div>
+    <section class="content">
+        <div class="tab main save-scroll" data-tab="main">
+             {{> systems/dsa5/templates/actors/parts/attributes.html}} 
+            <!--{{> modules/dsa5_ship_combat/templates/ship_main.html}}-->
+        </div>
+    </section>
+</section>
+
+</form>
