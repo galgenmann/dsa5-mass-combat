@@ -45,6 +45,16 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
         return data;
 
     }
+
+    activateListeners(html) {
+        super.activateListeners(html);
+        html.find(".gunners_input").change(ev => {
+            const val = parseInt(ev.currentTarget.value);
+            //todo: handle possible errors
+            this.object.setFlag("dsa5_ship_combat", "crew", {gunners: val});
+            this._render();
+        });
+    }
     
     get template() {
         return "./modules/dsa5_ship_combat/templates/ship_sheet.html";

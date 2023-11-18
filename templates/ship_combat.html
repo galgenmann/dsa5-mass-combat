@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="combat-item-attack col ten center item" data-item-id="{{item._id}}" data-mod="attack">
-                    <a data-mode="attack" class="ch-rollCombat d20 die-attack">10{{this.ship.crew.gunners}}</a>
+                    <a data-mode="attack" class="ch-rollCombat d20 die-attack">{{ship.crew.gunners}}</a>
                 </div>
                 <div class="combat-item-damage col ten center">
                     <a data-mode="damage" class="ch-rollCombat d6 die-damage">{{item.damagedie}}</a><span data-tooltip="{{localize 'damageOverThreshold'}}{{item.damageBonusDescription}}">{{item.damageAdd}}</span>
@@ -169,6 +169,6 @@
         Qualität-Geschützbesatzung   
     </div> 
     <div class="col eight center">
-        <input type="number" name="ship.crew.gunners" value="{{ship.crew.gunners}}">
+        <input class="gunners_input" type="number" name="ship.crew.gunners" value="{{ship.crew.gunners}}">
     </div>
 </div>  
