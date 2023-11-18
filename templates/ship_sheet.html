@@ -1,6 +1,16 @@
 
 <form class="lockfalse" autocomplete="off">
+    <header class="sheet-header">
+        <div class="charname headerInput">
+            <input class="input name" name="name" style="width:90%" type="text" value="{{actor.name}}" placeholder="Name" />
+            <span class="label name">Name</span>
+        </div>
 
+        <div class="headerInput">
+            <input class="input species" name="system.details.species.value" type="text" value="Boot" placeholder="Typ" />
+            <span class="label species">Typ</span>
+        </div>
+    </header>
 <div class="general">
     <img class="charimg profile" src="{{actor.img}}" data-tooltip="{{actor.name}}" data-edit="img">
 
@@ -67,11 +77,20 @@
         <i class="fas fa-angle-right right-btn"></i>
         <nav id="dsa5-primarytabs" class="sheet-tabs tabs">
             <a class="item" data-tab="main">{{localize "attributes"}}</a>
+            <a class="item" data-tab="combat">{{localize "Combat"}}</a>
+            <a class="item" data-tab="equipment">{{localize "equipment"}}</a>
         </nav>
     </div>
     <section class="content">
         <div class="tab main save-scroll" data-tab="main">
             {{> 'modules/dsa5_ship_combat/templates/ship_main.html' }}
+            
+        </div>
+        <div class="tab main save-scroll" data-tab="combat">
+            {{> 'modules/dsa5_ship_combat/templates/ship_combat.html' }}
+        </div>
+        <div class="tab main save-scroll" data-tab="equipment">
+            {{> 'modules/dsa5_ship_combat/templates/ship_inventory.html' }}
         </div>
     </section>
 </section>
