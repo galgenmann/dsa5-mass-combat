@@ -1,5 +1,15 @@
 import ActorSheetDsa5 from "../../../systems/dsa5/modules/actor/actor-sheet.js";
 
+class Weapon {
+    constructor() {
+        this.name = "New Weapon";
+        thi.damage = 0;
+        self.burndamage = 0;
+        self.range = 0;
+        self.notes = "";
+    }
+}
+
 function prepareShipFlags(actor) {
     console.log(actor.id);
     actor.setFlag("dsa5_ship_combat","crew", {
@@ -9,6 +19,43 @@ function prepareShipFlags(actor) {
         "sailors": 0,
         "gunners": 0
     });
+
+    actor.setFlag("dsa5_ship_combat", "weapons", {
+        "Backbord": [],
+        "Steuerbord": [],
+        "Heck": [],
+        "Bug": [],
+        "Zentral": []
+    });
+}
+
+class WeaponPicker extends FormApplication {
+    constructor(weapons = []) {
+        super();
+        this.weapons = weapons;
+    }
+
+    static get defaultOptions() {
+        return mergeObject(super.defaultOptions, {
+            popOut: true,
+            template: `./modules/dsa5_ship_combat/templates/weapon_picker.html`,
+            title: "Ship Weapon Picker",
+        })
+    }
+
+    activateListeners(html) {
+        super.activateListeners(html);
+    }
+
+    async _updateObject(event, formData) {
+        console.log(formData.input)
+    }
+
+    getData(opts = {}) {
+        let data = super.getData()
+        data.weapons = self.weapons; 
+        return data;
+    }
 }
 
 export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
@@ -16,6 +63,7 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
         Actors.registerSheet("dsa5", ActorSheetdsa5Ship, { types: ["character"] });
         game.dsa5.sheets.ActorSheetdsa5Ship = ActorSheetdsa5Ship;
         await loadTemplates(['modules/dsa5_ship_combat/templates/ship_main.html']);
+        await loadTemplates(['modules/dsa5_ship_combat/templates/weapon_picker.html']);
         await loadTemplates(['modules/dsa5_ship_combat/templates/ship_combat.html']);
         await loadTemplates(['modules/dsa5_ship_combat/templates/ship_inventory.html']);
         console.log(game.dsa5.sheets.ActorSheetdsa5Ship);
@@ -41,9 +89,9 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
         }
         const data = await super.getData(options);
         data.ship = data.actor.flags.dsa5_ship_combat;
+        console.log(data.ship);
 
         return data;
-
     }
 
     activateListeners(html) {
@@ -53,6 +101,10 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
             //todo: handle possible errors
             this.object.setFlag("dsa5_ship_combat", "crew", {gunners: val});
             this._render();
+        });
+        html.find(".weapon-add").on("click", () => {
+            let weapons = [new Weapon(), new Weapon()];
+            new WeaponPicker(weapons).render(true);
         });
     }
     
