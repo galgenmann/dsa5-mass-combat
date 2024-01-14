@@ -1,7 +1,7 @@
 
 
 <div class="range-weapons groupbox">
-    {{#each ship.weapons as |weapon|}}
+    {{#each ship.weapons as |weapons|}}
     <div class="row-section table-title lineheight">
         <div class="title-type col thirtyfive">
             <b>{{@key}}</b>
@@ -11,21 +11,29 @@
         </div>
 
         <div class="col ten center small" data-tooltip="CHAR.ATTACK">
-            {{localize "CHARAbbrev.AT"}}
+            Rumpfschaden
         </div>
         <div class="col ten center small" data-tooltip="damage">
-            {{localize "CHARAbbrev.damage"}}
+            Takelageschaden
         </div>
-
         <div class="col five center small max20">
-            {{localize "TYPES.Item.ammunition"}}
+            Anmerkungen
         </div>
         <div class="col zerofive center onlyMultiColumn">
 
         </div>
     </div>
     <div class="row-section wrap rowtable inventory">
-        <p>ein item<button class="weapon-add" type="button">Add</button></p>
+        {{#each weapons as |weapon|}}
+        <div class="col row-section">
+            <div class="col"><p>{{weapon.name}}</p></div>
+            <div class="col"><p>{{weapon.range}}</p></div>
+            <div class="col"><p>{{weapon.hullDamage}}/{{weapon.hullBurnDamage}}</p></div>
+            <div class="col"><p>{{weapon.rigDamage}}/{{weapon.rigBurnDamage}}</p></div>
+            <div class="col"><p>{{weapon.notes}}</p></div>
+        </div>
+        {{/each}}
+        <button class="weapon-add" targetpos="{{@key}}" type="button">Add</button>
     </div>
     {{/each}}
 </div>

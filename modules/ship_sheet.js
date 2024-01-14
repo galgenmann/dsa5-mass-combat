@@ -1,13 +1,24 @@
 import ActorSheetDsa5 from "../../../systems/dsa5/modules/actor/actor-sheet.js";
+//import ship_weapons_json from "./ship_weapons.json" assert { type: 'json'};
 
 class Weapon {
     constructor() {
         this.name = "New Weapon";
-        thi.damage = 0;
-        self.burndamage = 0;
-        self.range = 0;
-        self.notes = "";
+        this.hullDamage = 0;
+        this.rigDamage = 0;
+        this.hullBurnDamage = 0;
+        this.rigBurnDamage = 0;
+        this.range = 0;
+        this.notes = "";
+        this.trueDamage = false;
+        this.rigSickleDamage = null;
     }
+}
+
+class WeaponPickOption {
+    actorid = "";
+    weapons = [];
+    position = "";
 }
 
 function prepareShipFlags(actor) {
@@ -29,10 +40,19 @@ function prepareShipFlags(actor) {
     });
 }
 
+function readJson(){
+    fetch("./modules/dsa5_ship_combat/modules/ship_weapons.json")
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data)
+    console.log(data)
+  });
+}
+
 class WeaponPicker extends FormApplication {
-    constructor(weapons = []) {
+    constructor(pickoptions = new WeaponPickOption()) {
         super();
-        this.weapons = weapons;
+        this.pickoptions = pickoptions;
     }
 
     static get defaultOptions() {
@@ -40,11 +60,19 @@ class WeaponPicker extends FormApplication {
             popOut: true,
             template: `./modules/dsa5_ship_combat/templates/weapon_picker.html`,
             title: "Ship Weapon Picker",
-        })
+        });
     }
 
     activateListeners(html) {
         super.activateListeners(html);
+        html.find('.weapon-add').on('click', (e) => {      
+            let actor = game.actors.get(this.pickoptions.actorid);
+            let weapon_name = e.currentTarget.childNodes[0].data;
+            let weapon = this.pickoptions.weapons.find((w) => w.name === weapon_name);
+            let weapons = actor.flags.dsa5_ship_combat.weapons;
+            weapons[this.pickoptions.position].push(weapon);
+            actor.setFlag("dsa5_ship_combat", "weapons", weapons);
+        })
     }
 
     async _updateObject(event, formData) {
@@ -52,9 +80,11 @@ class WeaponPicker extends FormApplication {
     }
 
     getData(opts = {}) {
-        let data = super.getData()
-        data.weapons = self.weapons; 
+        let data = super.getData();
+        data.weapons = this.pickoptions.weapons; 
+
         return data;
+        //game.actors.get(actorId)
     }
 }
 
@@ -91,6 +121,7 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
         data.ship = data.actor.flags.dsa5_ship_combat;
         console.log(data.ship);
 
+
         return data;
     }
 
@@ -102,9 +133,19 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
             this.object.setFlag("dsa5_ship_combat", "crew", {gunners: val});
             this._render();
         });
-        html.find(".weapon-add").on("click", () => {
+        html.find(".weapon-add").on("click", (e) => {
             let weapons = [new Weapon(), new Weapon()];
-            new WeaponPicker(weapons).render(true);
+            let options = new WeaponPickOption();
+            //console.log(ship_weapons_json)
+            readJson();
+                fetch("./modules/dsa5_ship_combat/modules/ship_weapons.json")
+            .then((res) => res.json())
+            .then((weapons) => {
+                options.weapons = weapons;
+                options.actorid = this.actor.id;
+                options.position = e.currentTarget.attributes.targetpos.nodeValue;
+                new WeaponPicker(options).render(true);
+            });
         });
     }
     

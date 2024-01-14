@@ -1,0 +1,61 @@
+[
+    {
+        "name": "Hornisse",
+        "hullDamage": 2,
+        "rigDamage": 2,
+        "hullBurnDamage": 0,
+        "rigBurnDamage": 0,
+        "range": "0/-/-/-/-",
+        "notes": "nur gegen Besatzung; Mod. im Enterkampf",
+        "trueDamage": true
+    },
+    {
+        "name": "Drachenzunge",
+        "hullDamage": 0,
+        "rigDamage": 0,
+        "hullBurnDamage": 1,
+        "rigBurnDamage": 2,
+        "range": "0/-/-/-/-",
+        "notes": ""
+    },
+    {
+        "name": "Leichte Ballista",
+        "hullDamage": 1,
+        "rigDamage": 1,
+        "hullBurnDamage": 1,
+        "rigBurnDamage": 1,
+        "range": "0/1/2/-/-",
+        "notes": "mit Sichelklinge 2T*; auch Harpune; ",
+        "rigSickleDamage": 2
+    },
+    {
+        "name": "Schwere  Ballista",
+        "hullDamage": 2,
+        "rigDamage": 2,
+        "hullBurnDamage": 1,
+        "rigBurnDamage": 1,
+        "range": "0/1/2/-/-",
+        "notes": "mit Sichelklinge 4T*; auch Harpune; ",
+        "rigSickleDamage ": 4
+    },
+    {
+        "name": "Leichter Aal",
+        "hullDamage": 1,
+        "rigDamage": 1,
+        "hullBurnDamage": 1,
+        "rigBurnDamage": 1,
+        "range": "1/2/3/4/6",
+        "notes": "mit Sichelklinge 2T*; auch Harpune; ",
+        "rigSickleDamage": 2
+    },
+    {
+        "name": "Schwerer Aal",
+        "hullDamage": 2,
+        "rigDamage": 2,
+        "hullBurnDamage": 1,
+        "rigBurnDamage": 1,
+        "range": "1/2/3/4/6",
+        "notes": "mit Sichelklinge 4T*; auch Harpune; ",
+        "rigSickleDamage ": 4
+    }
+]
