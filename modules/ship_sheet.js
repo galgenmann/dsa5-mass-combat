@@ -134,7 +134,6 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
             this._render();
         });
         html.find(".weapon-add").on("click", (e) => {
-            let weapons = [new Weapon(), new Weapon()];
             let options = new WeaponPickOption();
             //console.log(ship_weapons_json)
             readJson();
@@ -146,6 +145,13 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
                 options.position = e.currentTarget.attributes.targetpos.nodeValue;
                 new WeaponPicker(options).render(true);
             });
+        });
+        
+        html.find(".weapon-remove").on("click", (e) => {
+            let position = e.curretTarget.attributes.targetpos;
+            let index = e.curretTarget.attributes.index;
+
+            this.actor.getFlag("")
         });
     }
     
