@@ -23,8 +23,8 @@ class WeaponPickOption {
 
 function prepareShipFlags(actor) {
     console.log(actor.id);
-    actor.setFlag("dsa5_ship_combat","crew", {
-        "rowers":0,
+    actor.setFlag("dsa5_ship_combat", "crew", {
+        "rowers": 0,
         "soliders": 0,
         "officers": 0,
         "sailors": 0,
@@ -40,13 +40,13 @@ function prepareShipFlags(actor) {
     });
 }
 
-function readJson(){
+function readJson() {
     fetch("./modules/dsa5_ship_combat/modules/ship_weapons.json")
-  .then((res) => res.json())
-  .then((data) => {
-    console.log(data)
-    console.log(data)
-  });
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data)
+            console.log(data)
+        });
 }
 
 class WeaponPicker extends FormApplication {
@@ -65,7 +65,7 @@ class WeaponPicker extends FormApplication {
 
     activateListeners(html) {
         super.activateListeners(html);
-        html.find('.weapon-add').on('click', (e) => {      
+        html.find('.weapon-add').on('click', (e) => {
             let actor = game.actors.get(this.pickoptions.actorid);
             let weapon_name = e.currentTarget.childNodes[0].data;
             let weapon = this.pickoptions.weapons.find((w) => w.name === weapon_name);
@@ -81,7 +81,7 @@ class WeaponPicker extends FormApplication {
 
     getData(opts = {}) {
         let data = super.getData();
-        data.weapons = this.pickoptions.weapons; 
+        data.weapons = this.pickoptions.weapons;
 
         return data;
         //game.actors.get(actorId)
@@ -89,7 +89,7 @@ class WeaponPicker extends FormApplication {
 }
 
 export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
-    static async registerSheet(){
+    static async registerSheet() {
         Actors.registerSheet("dsa5", ActorSheetdsa5Ship, { types: ["character"] });
         game.dsa5.sheets.ActorSheetdsa5Ship = ActorSheetdsa5Ship;
         await loadTemplates(['modules/dsa5_ship_combat/templates/ship_main.html']);
@@ -112,7 +112,7 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
     async _render(force = false, options = {}) {
         await super._render(force, options);
     }
-    
+
     async getData(options) {
         if (this.object.flags.dsa5_ship_combat === undefined && this.object.isOwner) {
             prepareShipFlags(this.object);
@@ -130,31 +130,33 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
         html.find(".gunners_input").change(ev => {
             const val = parseInt(ev.currentTarget.value);
             //todo: handle possible errors
-            this.object.setFlag("dsa5_ship_combat", "crew", {gunners: val});
+            this.object.setFlag("dsa5_ship_combat", "crew", { gunners: val });
             this._render();
         });
         html.find(".weapon-add").on("click", (e) => {
             let options = new WeaponPickOption();
             //console.log(ship_weapons_json)
             readJson();
-                fetch("./modules/dsa5_ship_combat/modules/ship_weapons.json")
-            .then((res) => res.json())
-            .then((weapons) => {
-                options.weapons = weapons;
-                options.actorid = this.actor.id;
-                options.position = e.currentTarget.attributes.targetpos.nodeValue;
-                new WeaponPicker(options).render(true);
-            });
+            fetch("./modules/dsa5_ship_combat/modules/ship_weapons.json")
+                .then((res) => res.json())
+                .then((weapons) => {
+                    options.weapons = weapons;
+                    options.actorid = this.actor.id;
+                    options.position = e.currentTarget.attributes.targetpos.nodeValue;
+                    new WeaponPicker(options).render(true);
+                });
         });
-        
-        html.find(".weapon-remove").on("click", (e) => {
-            let position = e.curretTarget.attributes.targetpos;
-            let index = e.curretTarget.attributes.index;
 
-            this.actor.getFlag("")
+        html.find(".weapon-remove").on("click", (e) => {
+            let position = e.currentTarget.parentElement.parentElement.parentElement.attributes.targetpos.nodeValue;
+            let index = e.currentTarget.attributes.index.nodeValue;
+
+            let weapons = this.actor.flags.dsa5_ship_combat.weapons;
+            weapons[position].splice(index, 1);
+            this.actor.setFlag("dsa5_ship_combat", "weapons", weapons);
         });
     }
-    
+
     get template() {
         return "./modules/dsa5_ship_combat/templates/ship_sheet.html";
     }

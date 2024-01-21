@@ -2,7 +2,7 @@
 
 <div class="range-weapons groupbox">
     {{#each ship.weapons as |weapons|}}
-    <div class="row-section table-title lineheight">
+    <div class="row-section table-title lineheight" >
         <div class="title-type col thirtyfive">
             <b>{{@key}}</b>
         </div>
@@ -23,7 +23,7 @@
 
         </div>
     </div>
-    <div class="row-section wrap rowtable inventory">
+    <div class="row-section wrap rowtable inventory" targetpos="{{@key}}">
         {{#each weapons as |weapon|}}
         <div class="col row-section">
             <div class="col"><p>{{weapon.name}}</p></div>
@@ -31,10 +31,10 @@
             <div class="col"><p>{{weapon.hullDamage}}/{{weapon.hullBurnDamage}}</p></div>
             <div class="col"><p>{{weapon.rigDamage}}/{{weapon.rigBurnDamage}}</p></div>
             <div class="col"><p>{{weapon.notes}}</p></div>
+            <div class="col"><button class="weapon-remove" index="{{@index}}" targettype="button">Remove</button></div>
         </div>
         {{/each}}
         <button class="weapon-add" targetpos="{{@key}}" type="button">Add</button>
-        <button class="weapon-remove" targetpos="{{@key}}" index="{{@index}}" targettype="button">Remove</button>
     </div>
     {{/each}}
 </div>
