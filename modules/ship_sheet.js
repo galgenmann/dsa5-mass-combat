@@ -13,6 +13,11 @@ class Weapon {
         this.trueDamage = false;
         this.rigSickleDamage = null;
     }
+
+    doDamage(targeActor = {}) {
+        // todo: add check if targetActor is a ship
+        console.log(`${targetActor.name} takes ${this.hullDamage} damage`)
+    }
 }
 
 class WeaponPickOption {
@@ -47,6 +52,13 @@ function readJson() {
             console.log(data)
             console.log(data)
         });
+}
+
+class AttackRoll extends FormApplication {
+    constructor(actor = {}) {
+        super();
+        this.actor = actor;
+    }
 }
 
 class WeaponPicker extends FormApplication {
@@ -152,6 +164,14 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
             let index = e.currentTarget.attributes.index.nodeValue;
 
             let weapons = this.actor.flags.dsa5_ship_combat.weapons;
+            weapons[position].splice(index, 1);
+            this.actor.setFlag("dsa5_ship_combat", "weapons", weapons);
+        });
+
+        html.find(".weapon-attack").on("click", (e) => {
+            let position = e.currentTarget.parentElement.parentElement.parentElement.attributes.targetpos.nodeValue;
+            let index = e.currentTarget.attributes.index.nodeValue;
+
             weapons[position].splice(index, 1);
             this.actor.setFlag("dsa5_ship_combat", "weapons", weapons);
         });
