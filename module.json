@@ -1,7 +1,7 @@
 {
-    "id": "dsa5_ship_combat",
-    "title": "DSA Ship Combat",
-    "description": "A simple module created for naval battles with the DSA4.1 (Das schwarze Auge or in english The Dark Eye) System.",
+    "id": "dsa5-mass-combat",
+    "title": "DSA Mass Combat",
+    "description": "A simple module created for Mass battles.",
     "authors": [
       {
         "name": "jumper"
@@ -11,7 +11,7 @@
       }
     ],
     "esmodules": [
-      "modules/ship_sheet.js",
+      "modules/unit-sheet.js",
       "modules/init.js"
     ],
     "relationships": {

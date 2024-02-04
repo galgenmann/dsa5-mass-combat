@@ -1,4 +1,4 @@
-import ActorSheetDsa5 from "../../../systems/dsa5/modules/actor/actor-sheet.js";
+import ItemSheetdsa5 from "../../../systems/dsa5/modules/item/item-sheet.js";
 //import ship_weapons_json from "./ship_weapons.json" assert { type: 'json'};
 
 class Weapon {
@@ -70,7 +70,7 @@ class WeaponPicker extends FormApplication {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             popOut: true,
-            template: `./modules/dsa5_ship_combat/templates/weapon_picker.html`,
+            template: `modules/dsa5_ship_combat/templates/weapon_picker.html`,
             title: "Ship Weapon Picker",
         });
     }
@@ -100,15 +100,10 @@ class WeaponPicker extends FormApplication {
     }
 }
 
-export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
+export default class ItemUnitSheet extends ItemSheetdsa5 {
     static async registerSheet() {
-        Actors.registerSheet("dsa5", ActorSheetdsa5Ship, { types: ["character"] });
+        Items.registerSheet("dsa5", ItemUnitSheet, { types: ["character"] });
         game.dsa5.sheets.ActorSheetdsa5Ship = ActorSheetdsa5Ship;
-        await loadTemplates(['modules/dsa5_ship_combat/templates/ship_main.html']);
-        await loadTemplates(['modules/dsa5_ship_combat/templates/weapon_picker.html']);
-        await loadTemplates(['modules/dsa5_ship_combat/templates/ship_combat.html']);
-        await loadTemplates(['modules/dsa5_ship_combat/templates/ship_inventory.html']);
-        console.log(game.dsa5.sheets.ActorSheetdsa5Ship);
     }
 
     static get defaultOptions() {
@@ -149,7 +144,7 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
             let options = new WeaponPickOption();
             //console.log(ship_weapons_json)
             readJson();
-            fetch("./modules/dsa5_ship_combat/modules/ship_weapons.json")
+            fetch("modules/dsa5_ship_combat/modules/ship_weapons.json")
                 .then((res) => res.json())
                 .then((weapons) => {
                     options.weapons = weapons;
@@ -178,6 +173,6 @@ export default class ActorSheetdsa5Ship extends ActorSheetDsa5 {
     }
 
     get template() {
-        return "./modules/dsa5_ship_combat/templates/ship_sheet.html";
+        return "modules/dsa5-mass-combat/templates/ship_sheet.html";
     }
 }
